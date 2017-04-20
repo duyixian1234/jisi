@@ -1,0 +1,80 @@
+.doc-view {
+      position: relative;
+      width: 100%;
+    height: calc(100% - 45px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 6px;
+    }
+.outer-container{
+      width: 100vw;
+    }
+.content-container{
+      padding: 0 20px;
+    width: auto;
+    min-width: 1176px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    }
+.doc-container{
+      position: static;
+    width: 816px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all .2s ease-in;
+    padding: 0;
+    }
+.editorcontainer{
+      position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    -ms-box-shadow: 0 1px 6px #ccc;
+    -o-box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1px 6px #ccc;
+  }
+.editorcontainer.pc {
+    min-height: 1172px;
+}
+.doc-title-box {
+    margin: 0 100px;
+    width: auto;
+    font-size: 22.5pt;
+    height: 60px;
+    padding-top: 90px;
+    border-bottom: 1px solid #e8ecf1;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+#outerdocbody {
+    background-color: #fff;
+}
+#innerdocbody {
+    padding: 11px 0 90px;
+    overflow: hidden;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: #333;
+}
+#innerdocbody>div {
+    word-wrap: break-word;
+    outline: none;
+    padding: 0 100px;
+}
+.innerdocbody {
+    outline: none;
+}
+.editable-footer {
+    width: 816px;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 36px;
+    text-align: center;
+}
+.footer-copy {
+    font-size: 14px;
+    color: #a5a5a5;
+    letter-spacing: 1px;
+    text-align: left;
+}

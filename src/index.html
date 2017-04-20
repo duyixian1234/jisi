@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>JisiEditor</title>
@@ -7,8 +8,59 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    html,
+    * {
+      user-select: text!important;
+    }
+    
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    
+    body {
+      overflow: hidden;
+    }
+    
+    body,
+    ul {
+      list-style: none;
+    }
+    
+    body {
+      background: #f0f0f0;
+      color: #000;
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+    }
+    
+    body,
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Helvetica, Tahoma, Arial, Hiragino Sans GB, Microsoft YaHei, \\5FAE软雅黑, SimSun, \\5B8B体, Heiti, \\9ED1体, sans-serif;
+    }
+    
+    body,
+    div,
+    input,
+    li,
+    p,
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .edit-heading-container,
+    body {
+      position: relative;
+    }
+  </style>
 </head>
+
 <body>
   <app-root>Loading...</app-root>
 </body>
+
 </html>

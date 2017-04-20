@@ -1,0 +1,29 @@
+<div class="doc-view">
+  <div class="outer-container">
+    <div class="content-container">
+      <div class="doc-container">
+        <div class="pc editorcontainer">
+          <div class="doc-title-box">
+            <span id="doc-title" class="doc-title-editor" contenteditable="true" #_title (blur)="changeTitle()">{{doc.title}}</span>
+          </div>
+          <div class="doc-title-box">
+            <span contenteditable="true" #_author  (blur)="changeAuthor()">{{doc.author}}</span>
+          </div>
+          <div id="outerdocbody">
+            <div id="innerdocbody" class="innerdocbody">
+              <div class="content">
+              <app-line-editor *ngFor="let index of doc.paragraphList" [id]="index" [author]="doc.content[index].author" [content]="doc.content[index].content"
+                (editor)="edit($event)" (add)="add($event)"></app-line-editor>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="editable-footer">
+    <span class="footer-copy">
+      <span>文档编写于</span><span>集思</span>
+    </span>
+  </div>
+</div>

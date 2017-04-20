@@ -1,0 +1,3 @@
+<div class="line-editor-box" [attr.pid]="id" [attr.author]="author">
+  <div #line_editor contenteditable="true" (keyup)="edit()" (keydown.enter)="new_($event)" (blur)="leave()">{{content}}</div>
+</div>
