@@ -1,4 +1,8 @@
 import {AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {duration, Moment, utc} from 'moment';
+
+import {Paragraph} from '../common/paragraph';
+import {ParagraphAdd} from '../common/paragraph-add';
 
 @Component({
   selector: 'app-line-editor',
@@ -10,8 +14,9 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
   @Input() id: number;
   @Input() author: string;
   @Input() content: string;
-  @Output() editor = new EventEmitter<any>();
-  @Output() add = new EventEmitter<any>();
+  @Input() time: Moment;
+  @Output() paragraph = new EventEmitter<Paragraph>();
+  @Output() add = new EventEmitter<ParagraphAdd>();
   edited = false;
   @ViewChild('line_editor')
   lineEditorElement: ElementRef;
@@ -32,11 +37,16 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
   edit() {
     this.edited = true;
     this.content = this.lineEditorElement.nativeElement.innerHTML;
-    this.editor.emit({id: this.id, author: this.author, content: this.content});
+    this.paragraph.emit({
+      pid: this.id,
+      author: this.author,
+      content: this.content,
+      time: utc().format()
+    });
   }
   leave() { this.edited = false; }
   new_(event: KeyboardEvent) {
     event.preventDefault();
-    this.add.emit({author: this.author, id: this.id});
+    this.add.emit({author: this.author, pid: this.id});
   }
 }

@@ -15,3 +15,6 @@ div.line-editor-box:before {
     font-weight: 400;
     font-style: normal;
 }
+div{
+    outline:none;
+}
