@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 export interface Article {
-  _rev: string;
+  _rev?: string;
   title: string;
   author: string;
   pidList: Array<number>;

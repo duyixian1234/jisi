@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {utc} from 'moment';
 import * as io from 'socket.io-client';
 
-import {Article, ContentArray} from '../common/article';
+import {Article} from '../common/article';
 import {Paragraph} from '../common/paragraph';
 import {ParagraphAdd} from '../common/paragraph-add';
 import {StoreService} from '../store.service';
@@ -23,7 +23,7 @@ export class EditorComponent implements OnInit {
   @ViewChild('_author') private authorEditElement: ElementRef;
   constructor(private store: StoreService) {
     this.article = {
-      _rev: '0_1111111111111111',
+      _rev:'',
       title: '无标题',
       author: 'user0',
       pidList: [0],
