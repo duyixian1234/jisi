@@ -13,6 +13,10 @@ def edit(json):
     print('received json: ' + str(json))
     emit('edit', json, json=True, broadcast=True)
 
+@socketio.on('save')
+def save(rev):
+    print('new version:',rev)
+    emit('save',rev, broadcast = True)
 
 @socketio.on('new')
 def new(id):

@@ -32,25 +32,31 @@ export class EditorComponent implements OnInit {
     };
     this.store.load().then(response => { this.article = response; });
     this.socket
-        .on('edit', (data: Paragraph) => {
-          this.article.content[data.pid] = {
-            author: data.author,
-            content: data.content,
-            time: utc(data.time)
-          }
-        })
-        .on('new', data => {
-          if (this.article.pidList.indexOf(data[1]) < 0) {
-            const time = utc(data.time);
-            this.article.nextPid += 1;
-            this.article.pidList.splice(
-                this.article.pidList.indexOf(data[0]) + 1, 0, data[1]);
-            this.article.content[data[1]] = {
-              author: data[2],
-              content: '',
-              time: time
-            };
-          }
+        .on('edit',
+            (data: Paragraph) => {
+              this.article.content[data.pid] = {
+                author: data.author,
+                content: data.content,
+                time: utc(data.time)
+              };
+            })
+        .on('new',
+            data => {
+              if (this.article.pidList.indexOf(data[1]) < 0) {
+                const time = utc(data.time);
+                this.article.nextPid += 1;
+                this.article.pidList.splice(
+                    this.article.pidList.indexOf(data[0]) + 1, 0, data[1]);
+                this.article.content[data[1]] = {
+                  author: data[2],
+                  content: '',
+                  time: time
+                };
+              };
+            })
+        .on('save', (rev: string) => {
+          console.log(rev);
+          this.article._rev = rev;
         });
   }
 
@@ -91,7 +97,9 @@ export class EditorComponent implements OnInit {
         'new', [data.pid, this.article.nextPid, this.article.author]);
   }
   save() {
-    this.store.save(this.article)
-        .then(response => this.article._rev = response.rev);
+    this.store.save(this.article).then(response => {
+      this.article._rev = response.rev;
+      this.socket.emit('save', this.article._rev);
+    });
   }
 }
