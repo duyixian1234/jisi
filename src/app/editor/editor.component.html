@@ -6,18 +6,19 @@
         <div class="pc editorcontainer">
           <div class="doc-title-box">
             <span id="doc-title" class="doc-title-editor" contenteditable="true" #_title (blur)="changeTitle()">{{article.title}}</span>
-            <span><sm-button class="basic" (click)="save()">保存</sm-button></span>
+            <button class="ms-Button" (click)="save()">保存</button>
           </div>
+          <div class="doc-title-box"></div>
           <div id="outerdocbody">
             <div id="innerdocbody" class="innerdocbody">
               <div class="content">
-                 <div >
-                   作者：
-            <span contenteditable="true" #_author  (blur)="changeAuthor()" style="outline:none">{{article.author}}</span>
-          </div>
-              <app-line-editor *ngFor="let index of article.pidList" [id]="index" [author]="article.content[index].author" [content]="article.content[index].content"
-                [time]="article.content[index].time" (paragraph)="edit($event)" (add)="add($event)"></app-line-editor>
-            </div>
+                <div>
+                  作者：
+                  <span contenteditable="true" #_author (blur)="changeAuthor()" style="outline:none">{{article.author}}</span>
+                </div>
+                <app-line-editor *ngFor="let index of article.pidList" [pid]="index" [author]="article.content[index].author" [content]="article.content[index].content"
+                  [time]="article.content[index].time" (paragraph)="edit($event)" (add)="add($event)"></app-line-editor>
+              </div>
             </div>
           </div>
         </div>

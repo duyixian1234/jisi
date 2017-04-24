@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,OnChanges,DoCheck} from '@angular/core';
 import {duration, Moment, utc} from 'moment';
 
 import {Paragraph} from '../common/paragraph';
@@ -10,8 +10,8 @@ import {ParagraphAdd} from '../common/paragraph-add';
   styleUrls: ['./line-editor.component.css']
 })
 export class LineEditorComponent implements OnInit, AfterViewInit,
-                                            AfterViewChecked {
-  @Input() id: number;
+                                            OnChanges, DoCheck {
+  @Input() pid: number;
   @Input() author: string;
   @Input() content: string;
   @Input() time: Moment;
@@ -24,12 +24,14 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
 
   ngOnInit() {}
   ngAfterViewInit() {
-    if (this.id !== 0) {
-      this.lineEditorElement.nativeElement.innerHTML = '';
+    if (this.pid !== 0) {
       this.lineEditorElement.nativeElement.focus();
     }
   }
-  ngAfterViewChecked() {
+  ngDoCheck() {
+    // console.log('do check');
+  }
+  ngOnChanges(changes: {[propKey: string]: any}) {
     if (!this.edited) {
       this.lineEditorElement.nativeElement.innerHTML = this.content;
     }
@@ -38,7 +40,7 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
     this.edited = true;
     this.content = this.lineEditorElement.nativeElement.innerHTML;
     this.paragraph.emit({
-      pid: this.id,
+      pid: this.pid,
       author: this.author,
       content: this.content,
       time: utc().format()
@@ -47,6 +49,6 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
   leave() { this.edited = false; }
   new_(event: KeyboardEvent) {
     event.preventDefault();
-    this.add.emit({author: this.author, pid: this.id});
+    this.add.emit({author: this.author, pid: this.pid});
   }
 }

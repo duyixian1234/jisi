@@ -15,10 +15,10 @@ export class StoreService {
         .then(response => response.json())
         .catch(this.handleError);
   }
-  save(article: Article) {
-    this.http.put(this.url, article)
+  save(article: Article): Promise<any> {
+    return this.http.put(this.url, article)
         .toPromise()
-        .then(response => console.log(response))
+        .then(response => response.json())
         .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {

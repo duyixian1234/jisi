@@ -7,7 +7,7 @@ export interface Article {
   nextPid: number;
   content: ContentArray;
 }
-interface ContentArray {
+export interface ContentArray {
   [index: number]: Line;
 }
 interface Line {
