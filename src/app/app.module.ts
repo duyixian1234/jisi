@@ -8,11 +8,12 @@ import {appRoutingProviders, routing} from './app.routes';
 import {EditorComponent} from './editor/editor.component';
 import {LineEditorComponent} from './line-editor/line-editor.component';
 import {StoreService} from './store.service';
+import {DocumentService} from './document.service';
 
 @NgModule({
   declarations: [AppComponent, EditorComponent, LineEditorComponent],
   imports: [BrowserModule, FormsModule, HttpModule, routing],
-  providers: [StoreService, appRoutingProviders],
+  providers: [StoreService, appRoutingProviders, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

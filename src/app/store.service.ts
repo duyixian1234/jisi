@@ -4,11 +4,13 @@ import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 
 import {Article} from './common/article';
-
+import {DocumentService} from './document.service';
 @Injectable()
 export class StoreService {
-  private url = 'http://127.0.0.1:5984/jisi/';
-  constructor(private http: Http) {}
+  private url:string;
+  constructor(private http: Http, private document: DocumentService) {
+    this.url = 'http://' + this.document.getDomain() + ':5984/jisi/';
+  }
   load(id: string): Promise<Article> {
     return this.http.get(this.url + id)
         .toPromise()

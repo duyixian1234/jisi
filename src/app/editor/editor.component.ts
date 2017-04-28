@@ -6,6 +6,7 @@ import * as io from 'socket.io-client';
 import {Article} from '../common/article';
 import {Paragraph} from '../common/paragraph';
 import {ParagraphAdd} from '../common/paragraph-add';
+import {DocumentService} from '../document.service';
 import {StoreService} from '../store.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild('_author') private authorEditElement: ElementRef;
   constructor(
       private store: StoreService, private route: ActivatedRoute,
-      private router: Router) {
+      private router: Router, private document: DocumentService) {
     this.article = {
       title: '无标题',
       author: 'user0',
@@ -73,7 +74,10 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.store.load(this.id)
-        .then(response => { this.article = response; })
+        .then(response => {
+          this.article = response;
+          this.document.setTitle(this.article.title);
+        })
         .catch(err => {
           this.store.create(this.id, this.article)
               .then(response => this.article._rev = response.rev);
@@ -86,6 +90,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       this.article.title = '无标题';
       this.titleElement.nativeElement.innerHTML = this.article.title;
     }
+    this.document.setTitle(this.article.title);  
     this.socket.emit('changeTitle', [this.id, this.article.title]);
   }
   changeAuthor() {
