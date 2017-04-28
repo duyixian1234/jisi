@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,OnChanges,DoCheck} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,OnChanges} from '@angular/core';
 import {duration, Moment, utc} from 'moment';
 
 import {Paragraph} from '../common/paragraph';
@@ -10,7 +10,7 @@ import {ParagraphAdd} from '../common/paragraph-add';
   styleUrls: ['./line-editor.component.css']
 })
 export class LineEditorComponent implements OnInit, AfterViewInit,
-                                            OnChanges, DoCheck {
+                                            OnChanges{
   @Input() pid: number;
   @Input() author: string;
   @Input() content: string;
@@ -27,9 +27,6 @@ export class LineEditorComponent implements OnInit, AfterViewInit,
     if (this.pid !== 0) {
       this.lineEditorElement.nativeElement.focus();
     }
-  }
-  ngDoCheck() {
-    // console.log('do check');
   }
   ngOnChanges(changes: {[propKey: string]: any}) {
     if (!this.edited) {

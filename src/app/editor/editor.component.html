@@ -7,8 +7,9 @@
           <div class="doc-title-box">
             <span id="doc-title" class="doc-title-editor" contenteditable="true" #_title (blur)="changeTitle()">{{article.title}}</span>
             <button class="ms-Button" (click)="save()">保存</button>
+            <button class="ms-Button" (click)="remove()">删除</button>
           </div>
-          <div class="doc-title-box"></div>
+          <!--<div class="doc-title-box"></div>-->
           <div id="outerdocbody">
             <div id="innerdocbody" class="innerdocbody">
               <div class="content">
